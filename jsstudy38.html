@@ -1,0 +1,32 @@
+<html>
+    <!-- 07.문서객체모델. 이벤트 활용 -->
+    <head>
+        <title>mutiple select 태그</title>
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const select = document.querySelector('select')
+                const p = document.querySelector('p')
+
+                select.addEventListener('change', (event) => {
+                    const options = event.currentTarget.options
+                    const list = []
+                    for (const option of options) {     // options 속성에 forEach()메소드 없어서 반복문 돌리는 방법
+                        if (option.selected) {
+                            list.push(option.textContent)
+                        }
+                    }
+                    p.textContent = `선택 : ${list.join(', ')}`
+                })
+            })
+        </script>
+    </head>
+    <body>
+        <select multiple>
+            <option>떡볶이</option>
+            <option>순대</option>
+            <option>오뎅</option>
+            <option>튀김</option>
+        </select>
+        <p></p>
+    </body>
+</html>
