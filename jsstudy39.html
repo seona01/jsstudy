@@ -1,0 +1,45 @@
+<html>
+    <!-- 07.문서객체모델. 이벤트 활용 -->
+    <head>
+        <title>cm단위를 여러 단위 환산</title>
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                let curValue
+                let transConst
+
+                const select = document.querySelector('select')
+                const input = document.querySelector('input')
+                const span = document.querySelector('span')
+
+                const calculate = () => {
+                    span.textContent = (curValue * transConst).toFixed(2)
+                    /*
+                    toFixed(2) 소수점 둘째자리까지 출력
+                    toFixed() 숫자를 문자열로 반환하기 때문에 Number()로 형 변환 필요
+                    */
+                }
+
+                select.addEventListener('change', (event) => {
+                    const options = event.currentTarget.options
+                    const index = event.currentTarget.options.selectedIndex
+                    transConst = Number(options[index].value)
+                    calculate()
+                })
+
+                input.addEventListener('keyup', (event) => {
+                    curValue = Number(event.currentTarget.value)
+                    calculate()
+                })
+            })
+        </script>
+    </head>
+    <body>
+        <input type="text"> cm = 
+        <span></span>
+        <select>
+            <option value="10">mm</option>
+            <option value="0.01">m</option>
+            <option value="0.393701">inch</option>
+        </select>
+    </body>
+</html>
