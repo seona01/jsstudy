@@ -1,0 +1,29 @@
+<html>
+    <!-- 07.문서객체모델. 이벤트 활용 -->
+    <!-- 아시아권 문자는 키보드 이벤트(keydown, keypress, keyup이벤트)로 원하는 것 구현할 수 없는 경우가 많고,
+    실제로 트위터는 타이머 사용해서 50밀리초마다 입력 양식 내부의 글자 확인해서 글자 수를 센다 -->
+    <head>
+        <title>글자 수 출력</title>
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const textarea = document.querySelector('textarea')
+                const h1 = document.querySelector('h1')
+                let timerId
+
+                textarea.addEventListener('focus', (event) => {
+                    timerId = setInterval(() => {
+                        const length = textarea.value.length
+                        h1.textContent = `글자 수 : ${length}`
+                    }, 50)
+                })
+                textarea.addEventListener('blur', (event) => {
+                    clearInterval(timerId)
+                })
+            })
+        </script>
+    </head>
+    <body>
+        <h1></h1>
+        <textarea></textarea>
+    </body>
+</html>
