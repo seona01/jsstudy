@@ -1,0 +1,51 @@
+<html>
+    <head>
+        <title>현재 시간 출력</title>
+        <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+        <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+        <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    </head>
+    <body>
+        <div id="root"></div>
+
+        <script type="text/babel">
+            class App extends React.Component {
+
+                // 생성자 코드
+                constructor (props) {
+                    // 부모 생성자 호출
+                    super(props)
+                    // 상태 선언하기. { 속성: 값 }. state속성에 시간 저장
+                    this.state = {
+                        time: new Date()
+                    }
+                }
+                render () {
+                    // state속성에 있는 값 출력
+                    return <h1>{this.state.time.toLocaleTimeString()}</h1>
+                }
+
+                // 컴포넌트가 화면에 출력될 때 호출. 컴포넌트가 내부적으로 특정 상황에 호출하는 메소드. 라이프사이클 메소드
+                componentDidMount () {
+                    this.timerId = setInterval(() =>{
+                        // state속성값 변경. ({변경할 속성: 값})
+                        this.setState({
+                            time: new Date()
+                        })
+                    }, 1000)
+                }
+
+                // 컴포넌트가 화면에서 제거될 때 호출. 컴포넌트가 내부적으로 특정 상황에 호출하는 메소드. 라이프사이클 메소드
+                componentWillUnmount() {
+                    clearInterval(this.timerId)
+                }
+                // 제거 하는 화면 구현 없지만 예제로 코딩
+
+            }     
+
+            // 출력하기
+            const container = document.getElementById('root')
+            ReactDOM.render(<App />, container)
+        </script>
+    </body>
+</html>
