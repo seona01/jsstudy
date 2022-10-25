@@ -1,0 +1,43 @@
+<html>
+    <head>
+        <title>item 컴포넌트에 속성 전달하기</title>
+        <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+        <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+        <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    </head>
+    <body>
+        <div id="root"></div>
+
+        <script type="text/babel">
+            class App extends React.Component {
+                render () {
+                    return <ul>
+                        <Item value="Item 컴포넌트 1번" />
+                        <Item value="Item 컴포넌트 2번" />
+                        <Item value="Item 컴포넌트 3번" />
+                    </ul>
+                }
+            }
+            /*
+            App컴포넌트에서 Item컴포넌트로 어떤 데이터 전달하고 싶을 때는 컴포넌트 속성 사용
+            App컴포넌트에서 Item컴포넌트로 value속성 전달하고,
+            Item컴포넌트에서 value속성 출력하는 예
+            */
+
+            class Item extends React.Component {
+
+                constructor (props) {
+                    super(props)
+                }
+
+                render () {
+                    return <li>{this.props.value}</li>
+                }
+            }
+
+            // 출력하기
+            const container = document.getElementById('root')
+            ReactDOM.render(<App />, container)
+        </script>
+    </body>
+</html>
